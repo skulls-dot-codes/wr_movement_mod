@@ -9,10 +9,14 @@ local SoldierInstance = Soldier
 function SoldierInstance:on_load(instance: SoldierBlueprint)
 	local soldier = instance.object :: SoldierEntityData
     local physics = soldier.characterPhysics :: CharacterPhysicsData
+    local ground = physics.states[1] :: OnGroundStateData
     local jump = physics.states[2] :: JumpStateData
     local air = physics.states[3] :: InAirStateData
     local animation = physics.states[8] :: AnimationControlledStateData
     local slide = physics.states[9] :: SlidingStateData
+
+    ground.groundHugging = false
+    ground.limitDownwardVelocity = true
 
     jump.jumpEffectSize = 0
 
@@ -28,6 +32,9 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
 
     air_prone.velocity = 0
     air_prone.speedModifier.forwardConstant = 0.0
+    air_prone.speedModifier.backwardConstant = 0.0
+    air_prone.speedModifier.leftConstant = 0.0
+    air_prone.speedModifier.rightConstant = 0.0
     air_prone.sprintMultiplier = 0.0
 
     local animation_stand = animation.poseInfo[1] :: CharacterStatePoseInfo
@@ -52,7 +59,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     local slide_crouch = slide.poseInfo[2] :: CharacterStatePoseInfo
     local slide_prone = slide.poseInfo[3] :: CharacterStatePoseInfo
 
-    slide_stand.velocity = 2 -- default
+    slide_stand.velocity = 4 -- default
     slide_stand.speedModifier.forwardConstant = 1.0 -- default
 
     slide_crouch.velocity = 1
