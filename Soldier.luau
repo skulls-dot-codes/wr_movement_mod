@@ -17,13 +17,14 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     local air_crouch = air.poseInfo[2] :: CharacterStatePoseInfo
     local air_prone = air.poseInfo[3] :: CharacterStatePoseInfo
 
-    air_stand.velocity = 6 -- default
-    air_stand.sprintMultiplier = 1.25 -- default
+    air_stand.velocity = 4
+    air_stand.sprintMultiplier = 1.0
 
     air_crouch.velocity = 1
     air_crouch.sprintMultiplier = 0.0
 
     air_prone.velocity = 0
+    air_prone.speedModifier.forwardConstant = 0.0
     air_prone.sprintMultiplier = 0.0
 
     local animation_stand = animation.poseInfo[1] :: CharacterStatePoseInfo
@@ -33,10 +34,11 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     animation_stand.velocity = 4 -- default
     animation_stand.sprintMultiplier = 1.0 -- default
 
-    animation_crouch.velocity = 1.7999999523162842 -- default
-    animation_crouch.sprintMultiplier = 1.0 -- default
+    animation_crouch.velocity = 1
+    animation_crouch.sprintMultiplier = 0.0
 
-    animation_prone.velocity = 0.800000011920929 -- default
+    animation_prone.velocity = 0.0
+    animation_prone.speedModifier.forwardConstant = 0.0
     animation_prone.sprintMultiplier = 0.0 -- default
 
 
@@ -48,7 +50,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     slide_stand.speedModifier.forwardConstant = 1.0 -- default
 
     slide_crouch.velocity = 1
-    slide_crouch.speedModifier.forwardConstant = 0.5
+    slide_crouch.speedModifier.forwardConstant = 0.0
 
     slide_prone.velocity = 0
     slide_prone.speedModifier.forwardConstant = 0.0
