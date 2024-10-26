@@ -9,9 +9,13 @@ local SoldierInstance = Soldier
 function SoldierInstance:on_load(instance: SoldierBlueprint)
 	local soldier = instance.object :: SoldierEntityData
     local physics = soldier.characterPhysics :: CharacterPhysicsData
+
+    physics.radiusToPredictCollisionOnCharacters = 0.5
+
     local ground = physics.states[1] :: OnGroundStateData
     local jump = physics.states[2] :: JumpStateData
     local air = physics.states[3] :: InAirStateData
+    local climb = physics.states[7] :: ClimbingStateData
     local animation = physics.states[8] :: AnimationControlledStateData
     local slide = physics.states[9] :: SlidingStateData
 
@@ -24,7 +28,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     local air_crouch = air.poseInfo[2] :: CharacterStatePoseInfo
     local air_prone = air.poseInfo[3] :: CharacterStatePoseInfo
 
-    air_stand.velocity = 4
+    air_stand.velocity = 6
     air_stand.sprintMultiplier = 1.0
 
     air_crouch.velocity = 1
@@ -37,6 +41,11 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     air_prone.speedModifier.rightConstant = 0.0
     air_prone.sprintMultiplier = 0.0
 
+    local climb_pose = climb.poseInfo[1] :: CharacterStatePoseInfo
+
+    climb.pushAwayVelocity = 0.0
+    climb_pose.velocity = 1
+
     local animation_stand = animation.poseInfo[1] :: CharacterStatePoseInfo
     local animation_crouch = animation.poseInfo[2] :: CharacterStatePoseInfo
     local animation_prone = animation.poseInfo[3] :: CharacterStatePoseInfo
@@ -44,7 +53,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     animation_stand.velocity = 4 -- default
     animation_stand.sprintMultiplier = 1.0 -- default
 
-    animation_crouch.velocity = 1
+    animation_crouch.velocity = 0
     animation_crouch.sprintMultiplier = 0.0
 
     animation_prone.velocity = 0.0
@@ -53,7 +62,6 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     animation_prone.speedModifier.leftConstant = 0.0
     animation_prone.speedModifier.rightConstant = 0.0
     animation_prone.sprintMultiplier = 0.0
-
 
     local slide_stand = slide.poseInfo[1] :: CharacterStatePoseInfo
     local slide_crouch = slide.poseInfo[2] :: CharacterStatePoseInfo
@@ -73,9 +81,6 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     slide_prone.speedModifier.backwardConstant = 0.0
     slide_prone.speedModifier.leftConstant = 0.0
     slide_prone.speedModifier.rightConstant = 0.0
-
-    physics.jumpPenaltyFactor = 1.5 -- default
-    physics.jumpPenaltyFactor = 0.33 -- default
 
     physics.allowPoseChangeDuringTransition = false
     physics.autoPushAwayFromWallsInProne = false
