@@ -10,7 +10,13 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
 	local soldier = instance.object :: SoldierEntityData
     local physics = soldier.characterPhysics :: CharacterPhysicsData
 
-    physics.radiusToPredictCollisionOnCharacters = 0.5
+    soldier.collisionInfo.damageAtVerticalVelocity[3].value = 0.0
+    soldier.collisionInfo.damageAtVerticalVelocity[4].value = 0.0
+    soldier.collisionInfo.damageAtVerticalVelocity[5].value = 0.0
+
+    soldier.collisionInfo.damageAtHorizVelocity[3].value = 0.0
+    soldier.collisionInfo.damageAtHorizVelocity[4].value = 0.0
+    soldier.collisionInfo.damageAtHorizVelocity[5].value = 0.0
 
     local ground = physics.states[1] :: OnGroundStateData
     local jump = physics.states[2] :: JumpStateData
