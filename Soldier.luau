@@ -27,7 +27,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     local air_crouch = air.poseInfo[2] :: CharacterStatePoseInfo
     local air_prone = air.poseInfo[3] :: CharacterStatePoseInfo
 
-    air_stand.velocity = 6
+    air_stand.velocity = 50
     air_stand.sprintMultiplier = 1.0
 
     air_crouch.velocity = 1
