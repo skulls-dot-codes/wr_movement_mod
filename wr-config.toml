@@ -1,0 +1,10 @@
+[script]
+name = "wr_official"
+version = "9.9.9"
+author_ids = ["NickelBF", "skulls"]
+description = "Bird is the word"
+repository = "https://gitlab.com/warsaw-revamped/modding/first-party-mod.git"
+tags = ["official", "wr"]
+
+[dependencies]
+partitions = "0.1.0"
