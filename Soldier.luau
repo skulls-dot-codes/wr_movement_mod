@@ -27,7 +27,7 @@ function SoldierInstance:on_load(instance: SoldierBlueprint)
     ground.groundHugging = false
     ground.limitDownwardVelocity = true
 
-    jump.jumpHeight = 5.2
+    jump.jumpHeight = 50
 
     local air_stand = air.poseInfo[1] :: CharacterStatePoseInfo
     local air_crouch = air.poseInfo[2] :: CharacterStatePoseInfo
